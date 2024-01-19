@@ -346,13 +346,32 @@ static void vprintfmt(void (*putch)(int, void**), void **putdat, const char *fmt
     }
   }
 }
+void omer_char(char ch){
+	//asm("li t4,0x080008000"	);	
+  asm("c.lui   t4, 0x10");    //  0x0000000000010000
+  asm("c.addiw t4, 1");       //  0x0000000000010001
+  asm("c.slli  t4, 15");      //  0x0000000080008000
+	asm("sb %0, 0(t4)"
+	:
+	:"r"(ch));
+}
+
+//inline void og_char(char ch){
+//	asm("li t4,0x080008000"	);	//0x80000
+//	//asm("addi t4,t4, 8"	);	//0x80008
+//	//asm("slli t4,t4, 12");	//0x80008000
+//	asm("sb %0, 0(t4)"
+//	:
+//	:"r"(ch));
+//}
 
 int printf(const char* fmt, ...)
 {
   va_list ap;
   va_start(ap, fmt);
 
-  vprintfmt((void*)putchar, 0, fmt, ap);
+  vprintfmt((void*)omer_char, 0, fmt, ap);
+  //vprintfmt((void*)putchar, 0, fmt, ap);
 
   va_end(ap);
   return 0; // incorrect return value, but who cares, anyway?
@@ -360,8 +379,8 @@ int printf(const char* fmt, ...)
 
 int puts(const char* s)
 {
-  printf(s);
-  printf("\n");
+  //printf(s);    //Bunlar ilginç bir şekilde putchar çağırıyor.
+  //printf("\n");
   return 0; // incorrect return value, but who cares, anyway?
 }
 

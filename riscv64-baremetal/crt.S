@@ -70,7 +70,7 @@ _start:
   la t0, 1f
   csrw mtvec, t0
 
-  fssr    x0
+  #fssr    x0
   fmv.s.x f0, x0
   fmv.s.x f1, x0
   fmv.s.x f2, x0
@@ -107,8 +107,8 @@ _start:
 #endif
 
   # initialize trap vector
-  la t0, trap_entry
-  csrw mtvec, t0
+#  la t0, trap_entry
+#  csrw mtvec, t0
 
   # initialize global pointer
 .option push
@@ -120,7 +120,8 @@ _start:
   and tp, tp, -64
 
   # get core id
-  csrr a0, mhartid
+#  csrr a0, mhartid
+  addi a0,x0,0
   # for now, assume only 1 core
   li a1, 1
 1:bgeu a0, a1, 1b

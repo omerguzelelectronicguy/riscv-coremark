@@ -18,7 +18,7 @@
 
 # Flag: RISCVTOOLS
 #	Use this flag to point to your RISCV tools
-RISCVTOOLS=$(RISCV)
+RISCVTOOLS?=/opt/riscv
 # Flag: RISCVTYPE
 #   Type of toolchain to use
 RISCVTYPE=riscv64-unknown-elf
@@ -31,7 +31,8 @@ CC = $(RISCVTOOLS)/bin/$(RISCVTYPE)-gcc
 # Flag: CFLAGS
 #	Use this flag to define compiler options. Note, you can add compiler options from the command line using XCFLAGS="other flags"
 #PORT_CFLAGS = -O2 -static -std=gnu99
-PORT_CFLAGS = -O2 -mcmodel=medany -static -std=gnu99 -fno-common -fno-tree-loop-distribute-patterns -nostdlib -nostartfiles -lm -lgcc -T $(PORT_DIR)/link.ld
+#PORT_CFLAGS = -march=rv64gc_zicond1p0 -mabi=lp64 -O3 -mcmodel=medany -static -std=gnu99 -fno-common -fno-tree-loop-distribute-patterns -nostdlib -nostartfiles -lm -lgcc -T $(PORT_DIR)/link.ld
+PORT_CFLAGS = -march=rv64gc -mabi=lp64 -O3 -mcmodel=medany -static -std=gnu99 -fno-common -fno-tree-loop-distribute-patterns -nostdlib -nostartfiles -lm -lgcc -T $(PORT_DIR)/link.ld
 FLAGS_STR = "$(PORT_CFLAGS) $(XCFLAGS) $(XLFLAGS) $(LFLAGS_END)"
 CFLAGS = $(PORT_CFLAGS) -I$(PORT_DIR) -I. -DFLAGS_STR=\"$(FLAGS_STR)\"
 #Flag: LFLAGS_END
@@ -105,7 +106,7 @@ port_prebuild: $(PGO_STAGE)
 
 .PHONY: build_pgo_gcc
 build_pgo_gcc:
-	$(MAKE) PGO=gen XCFLAGS="$(XCFLAGS) -fprofile-generate -DTOTAL_DATA_SIZE=1200" ITERATIONS=10 gen_pgo_data REBUILD=1
+	$(MAKE) PGO=gen XCFLAGS="$(XCFLAGS) -fprofile-generate -DTOTAL_DATA_SIZE=1200" gen_pgo_data REBUILD=1
 
 # Target: port_postbuild
 # Generate any files that are needed after actual build end.

@@ -108,7 +108,7 @@ void portable_free(void *p) {
 	#define SAMPLE_TIME_IMPLEMENTATION 1
 #else
     // Defined for RISCV
-    #define NSECS_PER_SEC 1000000000 // TODO: What freq are we assuming?
+    #define NSECS_PER_SEC 100000 // TODO: What freq are we assuming?
 	#define EE_TIMER_TICKER_RATE 1000 // TODO: What is this?
 	#define CORETIMETYPE clock_t
     #define read_csr(reg) ({ unsigned long __tmp; \
@@ -164,6 +164,10 @@ void stop_time(void) {
 	The sample implementation returns millisecs by default,
 	and the resolution is controlled by <TIMER_RES_DIVIDER>
 */
+unsigned long get_freq(){
+	return (unsigned long) NSECS_PER_SEC;
+}
+
 CORE_TICKS get_time(void) {
 	CORE_TICKS elapsed=(CORE_TICKS)(MYTIMEDIFF(stop_time_val, start_time_val));
 	return elapsed;
