@@ -70,7 +70,7 @@ typedef clock_t CORE_TICKS;
 /* Configuration: size_t and clock_t
      Note these need to match the size of the clock output and the xLen the processor supports
  */
-typedef unsigned long int size_t;
+typedef unsigned int size_t;
 typedef unsigned long int clock_t;
 typedef clock_t CORE_TICKS;
 #endif
@@ -105,7 +105,7 @@ typedef signed int ee_s32;
 typedef double ee_f32;
 typedef unsigned char ee_u8;
 typedef unsigned int ee_u32;
-typedef unsigned long long ee_ptr_int;
+typedef unsigned int ee_ptr_int;
 typedef size_t ee_size_t;
 /* align an offset to point to a 32b value */
 #define align_mem(x) (void *)(4 + (((ee_ptr_int)(x) - 1) & ~3))

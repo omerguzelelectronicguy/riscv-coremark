@@ -14,3 +14,6 @@ mv coremark.riscv ../
 
 make PORT_DIR=../riscv64-baremetal compile
 mv coremark.bare.riscv ../
+
+make PORT_DIR=../riscv32-baremetal compile
+mv coremark.bare.riscv ../
