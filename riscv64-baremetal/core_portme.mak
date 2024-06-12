@@ -45,7 +45,7 @@ CC = $(RISCVTOOLS)/bin/$(RISCVTYPE)-gcc
 # Flag: CFLAGS
 #	Use this flag to define compiler options. Note, you can add compiler options from the command line using XCFLAGS="other flags"
 #PORT_CFLAGS = -O2 -static -std=gnu99
-PORT_CFLAGS = $(ARCHFLAGS) -O2 -mcmodel=medany -static -std=gnu99 -fno-common -fno-tree-loop-distribute-patterns -nostdlib -nostartfiles -fno-builtin -lm -lgcc -T $(PORT_DIR)/link.ld
+PORT_CFLAGS = $(ARCHFLAGS) -O2 -mcmodel=medany -static -std=gnu99 -fno-common -fno-tree-loop-distribute-patterns -nostartfiles -fno-builtin -lm -lgcc -T $(PORT_DIR)/link.ld
 ifneq ($(TICKS_PER_SEC),)
   PORT_CFLAGS += -DEE_TICKS_PER_SEC=$(TICKS_PER_SEC)
 endif

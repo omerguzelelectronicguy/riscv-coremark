@@ -18,10 +18,10 @@
 
 # Flag: ARCH
 #   RISC-V ISA specification string
-ARCH ?= rv32imafdc_zicsr
+ARCH ?= rv32imaf_zicsr
 # Flag: ABI
 #   RISC-V ABI
-ABI ?= ilp32d
+ABI ?= ilp32f
 ARCHFLAGS = -march=$(ARCH) -mabi=$(ABI)
 # Flag: DEBUG
 #   Enable debugging output
