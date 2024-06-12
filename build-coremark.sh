@@ -10,15 +10,16 @@ RISCVTOOLS=/opt/riscv
 RV_GNU=riscv64-unknown-elf-
 cd $BASEDIR/$CM_FOLDER
 
+#XCFLAGS="-DMACRODEF" MACRODEF yerine macro atamaları yapılarbilir.
 # run the compile
 echo "Start compilation"
 #make PORT_DIR=../riscv64 ITERATIONS=$ITERATIONS RISCVTOOLS=${RISCVTOOLS} compile
 #mv coremark.riscv ../
 
-make PORT_DIR=../riscv64-baremetal ITERATIONS=$ITERATIONS RISCVTOOLS=${RISCVTOOLS} ARCH=rv64gc ABI=lp64d compile
+make PORT_DIR=../riscv64-baremetal ITERATIONS=$ITERATIONS RISCVTOOLS=${RISCVTOOLS} ARCH=rv64gc ABI=lp64d XCFLAGS="-DMACRODEF" compile
 cp coremark.bare.riscv ../${ITERATIONS}coremark64.bare.riscv -v
 
-make PORT_DIR=../riscv32-baremetal ITERATIONS=$ITERATIONS RISCVTOOLS=${RISCVTOOLS} ARCH=rv32imaf_zicsr ABI=ilp32f compile
+make PORT_DIR=../riscv32-baremetal ITERATIONS=$ITERATIONS RISCVTOOLS=${RISCVTOOLS} ARCH=rv32imaf_zicsr ABI=ilp32f XCFLAGS="-DMACRODEF" compile
 mv coremark.bare.riscv ../${ITERATIONS}coremark32.bare.riscv -v
 
 cd ..
