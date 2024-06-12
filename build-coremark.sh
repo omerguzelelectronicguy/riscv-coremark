@@ -41,7 +41,5 @@ ${RISCVTOOLS}/bin/${RV_GNU}objcopy -O binary ${ITERATIONS}coremark32.bare.riscv 
 spike -g -l --log-commits --log=${ITERATIONS}coremark64.bare.riscv.golden.log ${ITERATIONS}coremark64.bare.riscv 2> ${ITERATIONS}coremark64pc.log
 printf "\n\n"
 spike -g -l --log-commits --log=${ITERATIONS}coremark32.bare.riscv.golden.log --isa=rv32imafd_zicsr_zicntr ${ITERATIONS}coremark32.bare.riscv 2> ${ITERATIONS}coremark32pc.log
-#cat ${ITERATIONS}coremark64.bare.riscv.golden.log | grep "mem 0x0000000080008000" | awk  '{printf $8}' | xxd -r -p  
-#spike coremark64.bare.riscv
-
-#cat ${ITERATIONS}coremark64.bare.riscv.golden.log | grep "mem 0x0000000080008000" | awk  '{printf $8}' | xxd -r -p  > ${ITERATIONS}out.log
+#cat ${ITERATIONS}coremark64.bare.riscv.golden.log | grep "mem 0x0000000080008000" | awk  '{printf $8}' | xxd -r -p tee ${ITERATIONS}coremark64.out.log
+#cat ${ITERATIONS}coremark32.bare.riscv.golden.log | grep "mem 0x80008000"         | awk  '{printf $8}' | xxd -r -p tee ${ITERATIONS}coremark32.out.log
